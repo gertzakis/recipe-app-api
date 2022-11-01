@@ -22,7 +22,7 @@ jobs:
         run: "docker-compose run --rm app sh -c 'flake8'"
       - name: "Linting: black"
         run: "docker-compose run --rm app sh -c 'black .'"
-      - name: "Waint for DB"
+      - name: "Wait for DB"
         run: "docker-compose run --rm app sh -c 'python manage.py wait_for_db'"
       - name: "Run Unit Tests"
         run: "docker-compose run --rm app sh -c 'python manage.py test'"
