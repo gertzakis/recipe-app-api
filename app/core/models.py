@@ -1,5 +1,4 @@
 """Database models."""
-from tokenize import blank_re
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser,
