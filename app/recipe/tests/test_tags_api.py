@@ -96,11 +96,13 @@ class PrivateTagsApiTests(TestCase):
     def test_filter_tags_assigned_to_recipes(self):
         """Test listing tags by those assigned to recipes."""
         tag1 = Tag.objects.create(user=self.user, name="Vegan")
-        tag1 = Tag.objects.create(user=self.user, name="Vegetarian")
-        recipe = Recipe.objects.create(user=self.user, title="Pastischio", time_minutes=100, price=Decimal("15.0"))
+        tag2 = Tag.objects.create(user=self.user, name="Vegetarian")
+        recipe = Recipe.objects.create(
+            user=self.user, title="Pastischio", time_minutes=100, price=Decimal("15.0")
+        )
         recipe.tags.add(tag1)
 
-        res = self.client.get(TAGS_URL, {"assigned_only" 1})
+        res = self.client.get(TAGS_URL, {"assigned_only": 1})
 
         s1 = TagSerializer(tag1)
         s2 = TagSerializer(tag2)
@@ -128,7 +130,7 @@ class PrivateTagsApiTests(TestCase):
         )
         recipe1.tags.add(tag)
         recipe2.tags.add(tag)
-        res = self.client.get(TAGS_URL,{"assigned_only", 1} )
+        res = self.client.get(TAGS_URL, {"assigned_only": 1})
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
